@@ -1,0 +1,22 @@
+# Understanding the Code
+
+- The TokenRing class represents the implementation of the Token Ring algorithm.
+- The algorithm assumes a fixed number of processes (N = 5) and a predefined token value (TOKEN = -1).
+- Each process maintains two flags: hasToken (indicating if it has the token) and inCS (indicating if it is in the critical section).
+- The algorithm works by passing a token in a circular manner among the processes.
+- Each process continuously checks if it has the token. If it does:
+  - It enters the critical section, performs a task, and then exits.
+  - After exiting, it passes the token to the next process in the ring.
+- If a process does not have the token, it waits for a short time before checking again.
+- The main thread initializes the token holder and starts the processes in separate threads.
+- The processes run concurrently, and the algorithm ensures fair access to the critical section.
+
+# Token Ring Algo
+
+The Token Ring algorithm enables processes to take turns entering the critical section, using a token passing mechanism. Only the process with the token can access the critical section, ensuring mutual exclusion among the processes.
+
+Only one process at a time is allowed to enter the critical section to perform the task, while other processes must wait for their turn. -> Mutual Exclusion
+
+By passing the token in a predictable order, it allows processes to communicate and coordinate their activities, ensuring orderly access to shared resources and preventing conflicts.
+
+If a process fails or goes offline, the token will continue circulating among the remaining processes, maintaining the integrity of the system and allowing it to recover once the failed process becomes available again.

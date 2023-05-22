@@ -1,0 +1,16 @@
+- `netstat -ano | findstr :1099`
+
+- `taskkill /PID <PID> /F`
+
+### Commands:
+
+`javac ChatService.java ChatServer.java ChatClient.java`
+`rmiregistery`
+
+### other terminal:
+
+java ChatServer
+
+### other terminal:
+
+java ChatClient

@@ -1,0 +1,64 @@
+# Bully Algo
+
+- Each process in the system has an ID, and initially, all processes are assumed to be active.
+- When a process notices that the coordinator has failed or becomes inactive, it starts an election process.
+- The process with the highest ID initiates the election by sending election messages to all processes with higher IDs.
+- If an active process receives an election message, it responds with an "alive" message to indicate its presence.
+- If a process doesn't receive any "alive" message within a certain time, it assumes that it is the highest ID active process and becomes the new coordinator.
+- The new coordinator sends a coordinator message to all processes to inform them about the new leader.
+
+# Understanding of Code
+
+- The Bully class represents the implementation of the Bully algorithm.
+- It maintains the state of each process (active or inactive) in the state array.
+- The up method brings a process up by setting its state to active and initiates an election by sending election messages to processes with higher IDs.
+- The down method brings a process down by setting its state to inactive.
+- The mess method sends a message from a process to all processes, checking if the coordinator is active and initiating an election if necessary.
+- The main method allows users to interactively bring processes up, bring processes down, and send messages.
+- The coordinator is initially process p5 (highest ID process).
+
+In summary, the Bully algorithm ensures that the system always has an active coordinator by initiating elections when the current coordinator fails. The process with the highest ID takes over as the new coordinator, maintaining coordination in the distributed system.
+
+Overall, the Bully algorithm is designed to handle failures and elect a new coordinator when the current - coordinator becomes inactive. It provides a decentralized approach to maintain coordination and leadership among - processes in a distributed system.
+
+# Ring Algo
+
+- Each process is assigned a unique ID and is initially in an active state.
+
+- The processes are arranged in a logical ring structure, where each process has a reference to its neighboring processes.
+
+- When an election needs to be initiated, a process sends a message to its neighboring process with a higher ID.
+
+- Each process that receives the message compares its own ID with the received ID. If its ID is higher, it discards the message. If its ID is lower, it forwards the message to the next process.
+
+- The process that eventually receives the message and has the highest ID becomes the leader or coordinator.
+
+- The leader broadcasts its ID to all processes, indicating that it has been elected as the coordinator.
+
+# Understanding of Code
+
+- The code initializes an array of processes (proc[]) and assigns each process an ID, state, and an index.
+
+- The processes are sorted based on their IDs in ascending order.
+
+- The code enters a loop where the user can choose to initiate an election or quit.
+
+- When an election is initiated, the process number that starts the election is entered. The election message is then passed along the ring until it reaches the process with the highest ID.
+
+- The process with the highest ID becomes the coordinator, and its ID is printed as the selected coordinator.
+
+- The state of the selected coordinator process is set to "inactive" to prevent it from participating in future elections.
+
+- The code continues to loop, allowing the user to initiate more elections or quit the program.
+
+### Bully Algorithm:
+
+- Key Idea: The Bully algorithm is a bully-based approach where higher ID processes have authority over lower ID processes.
+- Leader Selection Process: When a process detects the absence of a coordinator or wants to initiate an election, it challenges lower ID processes by sending election messages. The process with the highest ID becomes the coordinator.
+- Fault Tolerance: The Bully algorithm requires a recovery mechanism to handle the failure of processes. Failed processes need to be detected and recovered to maintain the integrity of the system.
+
+### Ring Algorithm:
+
+- Key Idea: The Ring algorithm is a ring-based approach where processes form a logical ring structure.
+- Leader Selection Process: When a process initiates an election, an election message is passed sequentially through the ring until it reaches the process with the highest ID. This process becomes the coordinator.
+- Fault Tolerance: The Ring algorithm does not involve recovery of failed processes. If a process fails, it is simply excluded from the ring, and the leader selection process continues with the remaining active processes.

@@ -1,0 +1,32 @@
+# Working of the Berkeley Algorithm:
+
+- Each machine in the system periodically sends its local clock time to a central time coordinator.
+- The time coordinator receives the clock times from all machines and calculates the average clock time.
+- The time coordinator then broadcasts the adjusted clock time to all machines.
+- Each machine adjusts its local clock based on the difference between its own clock time and the average clock time calculated by the coordinator.
+
+# Understanding the Code
+
+- The BerkeleyAlgo class sets up a server socket on a specified port and listens for incoming connections from clients.
+
+- When a client connects, a new ClientHandler thread is created to handle the client's request.
+
+- The ClientHandler class implements the Runnable interface and defines the logic to handle each client's request.
+
+- In the run method of ClientHandler, it receives a time request from the client and retrieves the client's request time.
+
+- The server sends the current time to the client.
+
+- The clock difference between the current time and the client's request time is calculated.
+
+- The server connects to itself (localhost) to send the clock difference to the server.
+
+- The server receives the average clock difference from the server.
+
+- The client adjusts its clock by adding the average clock difference to the current time.
+
+- The client's adjusted time is printed.
+
+- Sockets are closed to free up resources.
+
+Overall, this code sets up a server that handles time synchronization requests from clients using the Berkeley Algorithm. It calculates the clock difference between the client and the server, exchanges information with the server, and adjusts the client's clock accordingly.
