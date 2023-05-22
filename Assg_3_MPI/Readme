@@ -1,0 +1,32 @@
+- The code starts by defining the number of threads to be used (NUM_THREADS), which is set to the number of available processors on the system.
+
+- An array is created and initialized with some sample values.
+
+- The array is divided into equal parts based on the number of threads (NUM_THREADS). Each part is stored in a 2D array called partitions.
+
+- A fixed thread pool is created using the Executors.newFixedThreadPool() method, with the number of threads specified by NUM_THREADS.
+
+- SumTask objects are created for each partition of the array. SumTask is a nested class that implements the Runnable interface.
+
+- Each SumTask object is submitted to the thread pool using the executor.execute() method. This will execute the run() method of each SumTask object in separate threads.
+
+- After submitting all the tasks, the executor is shut down using executor.shutdown() to prevent new tasks from being submitted.
+
+- The program waits for all the tasks to complete using executor.awaitTermination(). This ensures that the program doesn't proceed to the next step until all the tasks have finished executing.
+
+- Once all the tasks are completed, the partial results from each SumTask object are summed up to get the final result.
+
+- The final sum is printed to the console.
+
+The main idea behind this approach is to divide the array into smaller parts and assign each part to a separate thread for concurrent processing. By utilizing multiple threads, the program can take advantage of the available processing power to compute the sum faster than in a sequential manner.
+
+# Commands
+
+a. Download MPJ Express (mpj.jar) and unpack it.
+b. Set MPJ_HOME and PATH environment variables:
+export MPJ_HOME=</path/to/mpj/>
+export PATH=$MPJ_HOME/bin:$PATH
+
+c. javac -cp $MPJ_HOME/lib/mpj.jar Asign2.java //compile
+
+d. $MPJ_HOME/bin/mpjrun.sh -np 10 Asign2 //run
